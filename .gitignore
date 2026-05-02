@@ -216,3 +216,25 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Environment variables — NEVER commit secrets!
+.env
+.env.local
+.env.*.local
+
+# Data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Models
+models/*.pkl
+!models/.gitkeep
+
+# Generated files
+predictions.csv
+*.csv
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
