@@ -4,6 +4,7 @@ Saves intermediate progress to allow resumption after failures.
 """
 
 import json
+import argparse
 from pathlib import Path
 
 from src.riot_client import RiotClient
@@ -20,11 +21,19 @@ def main() -> None:
 
     entries = league['entries']
     entries.sort(key=lambda e: e['leaguePoints'], reverse=True)
-    top_players = entries[:50]
+    top_players = entries[:100]
     print(f'Using top {len(top_players)} Master players by LP')
 
-    output_dir = Path('data/raw/challenger')
-    output_dir.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description='Fetch Master league TFT matches')
+    parser.add_argument(
+        '--output-dir',
+        type=str,
+        default='data/raw/challenger',
+        help='Directory to save matches (default: data/raw/challenger)',
+    )
+    args = parser.parse_args()
+
+    output_dir = Path(args.output_dir)
     
     # Checkpoint file for resumption
     progress_file = output_dir / '_progress.json'
