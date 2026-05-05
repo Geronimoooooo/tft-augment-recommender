@@ -34,6 +34,7 @@ RATE_LIMIT_PER_2_MINUTES = 100
 TFT_GAME_TYPE = 'standard'
 TFT_QUEUE_TYPE = 'RANKED_TFT'
 K = 3  # number of items to recommend per champion
+PT = 2 # placement threshold parameeter: number of player's placement as a filter for data: placement <= 2 - taken, > 2 - skipped
 
 #===Validation===
 

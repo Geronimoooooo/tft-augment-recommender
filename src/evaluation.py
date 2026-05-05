@@ -84,6 +84,7 @@ def evaluate_recommender(
         context = Context(
             champion=row['character_id'],
             tier=row['tier'],
+            traits=row['traits'],
         )
         recommended = recommender.recommend(context)
         if not recommended:

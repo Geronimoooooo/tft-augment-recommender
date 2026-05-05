@@ -67,6 +67,8 @@ def matches_to_unit_records(matches: list[dict]) -> pd.Dataframe:
             placement = p['placement']
             level = p['level']
             last_round = p['last_round']
+            active_traits = tuple(sorted(t['name'] for t in p.get('traits', [])
+                                         if t.get('tier_current', 0) > 0))
             for u in p.get('units', []):
                 rows.append({
                     'match_id': match_id,
@@ -78,6 +80,7 @@ def matches_to_unit_records(matches: list[dict]) -> pd.Dataframe:
                     'character_id': u['character_id'],
                     'tier': u['tier'],
                     'rarity': u['rarity'],
+                    'traits': active_traits,
                     'itemNames': u.get('itemNames', []),
                     'num_items': len(u.get('itemNames', []))
                 })

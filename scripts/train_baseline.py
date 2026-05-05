@@ -16,8 +16,9 @@ from src.recommenders.frequency import FrequencyRecommender
 from src.recommenders.tier_frequency import TierFrequencyRecommender
 from src.recommenders.random_recommender import RandomRecommender
 from src.recommenders.popularity_recommender import PopularityRecommender
+from src.recommenders.trait_recommender import TraitFrequencyRecommender
 from src.evaluation import evaluate_recommender
-from src.config import K
+from src.config import K, PT
 
 def main() -> None:
     print('=' * 60)
@@ -42,10 +43,11 @@ def main() -> None:
     print(f'  Test:  {len(test_df)} rows ({len(test_ids)} matches)')
 
     print('\n[4/4] Training and evaluating...')
-    recommenders = {'Frequency (per-champion)': FrequencyRecommender(top_k=3, placement_threshold=2),
-                    'Frequency + tier': TierFrequencyRecommender(top_k=K, placement_threshold=2),
-                    'Popularity': PopularityRecommender(top_k=3, placement_threshold=2),
-                    'Random': RandomRecommender(top_k=3, random_state=42)}
+    recommenders = {'Frequency (per-champion)': FrequencyRecommender(top_k=K, placement_threshold=PT),
+                    'Frequency + tier': TierFrequencyRecommender(top_k=K, placement_threshold=PT),
+                    'Frequency + trait': TraitFrequencyRecommender(top_k=K, placement_threshold=PT),
+                    'Popularity': PopularityRecommender(top_k=K, placement_threshold=PT),
+                    'Random': RandomRecommender(top_k=K, random_state=42)}
     results = {}
     for name, rec in recommenders.items():
         print(f'\n ---{name}---')

@@ -19,3 +19,4 @@ class Context:
     """
     champion: str
     tier: int = 1
+    traits: tuple[str, ...] = ()
